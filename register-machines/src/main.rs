@@ -180,7 +180,7 @@ fn eval_program(program: &[Instruction], init: &State) -> State {
         };
     }
 
-    return (label, registers);
+    (label, registers)
 }
 
 fn encode_program_to_list(program: &[Instruction]) -> Vec<u128> {
@@ -191,8 +191,19 @@ fn decode_list_to_program(program: &[u128]) -> Vec<Instruction> {
     program.iter().map(|&g| decode(g)).collect()
 }
 
+enum Either<L, R> {
+    Left(L),
+    Right(R),
+}
+
 fn main() {
-    
+    let x: Either<i32, i32> = Either::Left(5);
+
+
+    match x {
+        Either::Left(n) | Either::Right(n) => println!("n = {}", n),
+        _ => panic!()
+    }
 }
 
 mod test {
